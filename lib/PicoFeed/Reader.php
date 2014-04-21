@@ -69,7 +69,7 @@ class Reader
      * @param  string  $timezone       DateTimeZome
      * @return Reader
      */
-    public function setTimeZone($timezone = '') {
+    public static function setTimeZone($timezone = '') {
 
         if(!empty($timezone)) {
             self::$timezome = trim($timezone);

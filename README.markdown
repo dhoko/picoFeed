@@ -137,6 +137,16 @@ Just call the static method `proxy()` before everything else:
 If your proxy is protected with a login/password:
 
     PicoFeed\Client::proxy($hostname, $port, $username, $password);
+    
+### Set a custom Timezone
+
+Call the setTimeZone method from Reader.
+
+```php
+    Reader::setTimeZone();
+```
+
+[List of supported TimeZones](http://php.net/manual/en/timezones.php)
 
 ### Generate RSS 2.0 feed
 
