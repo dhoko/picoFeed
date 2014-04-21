@@ -1,6 +1,7 @@
 <?php
 
 namespace PicoFeed;
+use PicoFeed\Reader;
 
 class Logging
 {
@@ -8,6 +9,7 @@ class Logging
 
     public static function log($message)
     {
-        self::$messages[] = '['.date('Y-m-d H:i:s').'] '.$message;
+        $date = new \DateTime("now",new \DateTimeZone(Reader::getTimeZone()));
+        self::$messages[] = '['.$date->format('Y-m-d H:i:s').'] '.$message;
     }
 }

@@ -2,7 +2,8 @@
 
 namespace PicoFeed\Clients;
 
-use \PicoFeed\Logging;
+use PicoFeed\Client;
+use PicoFeed\Logging;
 
 /**
  * Stream context HTTP client
@@ -10,7 +11,7 @@ use \PicoFeed\Logging;
  * @author  Frederic Guillot
  * @package client
  */
-class Stream extends \PicoFeed\Client
+class Stream extends Client
 {
     /**
      * Do the HTTP request

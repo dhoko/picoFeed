@@ -2,7 +2,7 @@
 
 namespace PicoFeed;
 
-require_once __DIR__.'/Logging.php';
+use PicoFeed\Logging;
 
 abstract class Client
 {

@@ -2,9 +2,10 @@
 
 namespace PicoFeed\Clients;
 
-use \PicoFeed\Logging;
+use PicoFeed\Client;
+use PicoFeed\Logging;
 
-class Curl extends \PicoFeed\Client
+class Curl extends Client
 {
     private $body = '';
     private $body_length = 0;

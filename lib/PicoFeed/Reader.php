@@ -2,10 +2,11 @@
 
 namespace PicoFeed;
 
-require_once __DIR__.'/Logging.php';
-require_once __DIR__.'/Parser.php';
-require_once __DIR__.'/Client.php';
-require_once __DIR__.'/Filter.php';
+use PicoFeed\Logging;
+use PicoFeed\Parser;
+use PicoFeed\Client;
+use PicoFeed\Filter;
+
 
 /**
  * Reader class
@@ -40,6 +41,13 @@ class Reader
     private $encoding = '';
 
     /**
+     * DateTimeZone
+     *
+     * @var string
+     */
+    private static $timezone = 'Europe/Paris';
+
+    /**
      * Constructor
      *
      * @access public
@@ -52,6 +60,20 @@ class Reader
         $this->content = $content;
         $this->encoding = '';
         return $this;
+    }
+
+    /**
+     * Set a custom TimeZone
+     *
+     * @access public
+     * @param  string  $timezone       DateTimeZome
+     * @return Reader
+     */
+    public function setTimeZone($timezone = '') {
+
+        if(!empty($timezone)) {
+            self::$timezome = trim($timezone);
+        }
     }
 
     /**
@@ -107,6 +129,16 @@ class Reader
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Get the reader TimeZone
+     *
+     * @access public
+     * @return String
+     */
+    public static function getTimeZone() {
+        return self::$timezone;
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace PicoFeed\Writers;
 
-require_once __DIR__.'/../Writer.php';
+use PicoFeed\Writer;
 
-class Atom extends \PicoFeed\Writer
+
+class Atom extends Writer
 {
     private $required_feed_properties = array(
         'title',

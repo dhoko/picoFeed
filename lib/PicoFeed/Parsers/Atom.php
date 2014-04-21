@@ -2,13 +2,18 @@
 
 namespace PicoFeed\Parsers;
 
+use PicoFeed\Parser;
+use PicoFeed\Logging;
+use PicoFeed\Filter;
+
+
 /**
  * Atom parser
  *
  * @author  Frederic Guillot
  * @package parser
  */
-class Atom extends \PicoFeed\Parser
+class Atom extends Parser
 {
     /**
      * Parse the document
@@ -18,14 +23,14 @@ class Atom extends \PicoFeed\Parser
      */
     public function execute()
     {
-        \PicoFeed\Logging::log(\get_called_class().': begin parsing');
+        Logging::log(\get_called_class().': begin parsing');
 
         \libxml_use_internal_errors(true);
         $xml = \simplexml_load_string($this->content);
 
         if ($xml === false) {
-            \PicoFeed\Logging::log(\get_called_class().': XML parsing error');
-            \PicoFeed\Logging::log($this->getXmlErrors());
+            Logging::log(\get_called_class().': XML parsing error');
+            Logging::log($this->getXmlErrors());
             return false;
         }
 
@@ -36,8 +41,8 @@ class Atom extends \PicoFeed\Parser
         $this->updated = $this->parseDate((string) $xml->updated);
         $author = (string) $xml->author->name;
 
-        \PicoFeed\Logging::log(\get_called_class().': Title => '.$this->title);
-        \PicoFeed\Logging::log(\get_called_class().': Url => '.$this->url);
+        Logging::log(\get_called_class().': Title => '.$this->title);
+        Logging::log(\get_called_class().': Url => '.$this->url);
 
         foreach ($xml->entry as $entry) {
 
@@ -64,8 +69,8 @@ class Atom extends \PicoFeed\Parser
                     $item->enclosure = (string) $link['href'];
                     $item->enclosure_type = (string) $link['type'];
 
-                    if (\PicoFeed\Filter::isRelativePath($item->enclosure)) {
-                        $item->enclosure = \PicoFeed\Filter::getAbsoluteUrl($item->enclosure, $this->url);
+                    if (Filter::isRelativePath($item->enclosure)) {
+                        $item->enclosure = Filter::getAbsoluteUrl($item->enclosure, $this->url);
                     }
                     break;
                 }
@@ -74,7 +79,7 @@ class Atom extends \PicoFeed\Parser
             $this->items[] = $item;
         }
 
-        \PicoFeed\Logging::log(\get_called_class().': parsing finished ('.count($this->items).' items)');
+        Logging::log(\get_called_class().': parsing finished ('.count($this->items).' items)');
 
         return $this;
     }

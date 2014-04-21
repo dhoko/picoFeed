@@ -2,10 +2,10 @@
 
 namespace PicoFeed;
 
-require_once __DIR__.'/Client.php';
-require_once __DIR__.'/Encoding.php';
-require_once __DIR__.'/Logging.php';
-require_once __DIR__.'/Filter.php';
+use PicoFeed\Client;
+use PicoFeed\Encoding;
+use PicoFeed\Logging;
+use PicoFeed\Filter;
 
 class Grabber
 {

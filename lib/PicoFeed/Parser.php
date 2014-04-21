@@ -2,10 +2,11 @@
 
 namespace PicoFeed;
 
-require_once __DIR__.'/Logging.php';
-require_once __DIR__.'/Filter.php';
-require_once __DIR__.'/Encoding.php';
-require_once __DIR__.'/Grabber.php';
+use PicoFeed\Logging;
+use PicoFeed\Filter;
+use PicoFeed\Encoding;
+use PicoFeed\Reader;
+use PicoFeed\Grabber;
 
 /**
  * Base parser class
@@ -261,7 +262,7 @@ abstract class Parser
      */
     public function getValidDate($format, $value)
     {
-        $date = \DateTime::createFromFormat($format, $value);
+        $date = \DateTime::createFromFormat($format, $value, new \DateTimeZone(Reader::getTimeZone()));
 
         if ($date !== false) {
             $errors = \DateTime::getLastErrors();
